@@ -17,7 +17,7 @@ public class RankBoardApi {
     @PostMapping
     public CommonResponse<ScoreDto.ResponsePoint> updateScore(@RequestBody ScoreDto.RequestPoint requestPoint) {
         ScoreInfo scoreInfo = rankBoardFacade.updateScore(requestPoint.getUserId(), requestPoint.getPoint());
-        return CommonResponse.success(null);
+        return CommonResponse.success(ScoreDto.ResponsePoint.byInfo(scoreInfo));
     }
 
     @GetMapping

@@ -7,6 +7,14 @@ import lombok.Getter;
 @Getter
 public class Score {
     private String userId;
-    private Long score;
+    private Double score;
     private Long rank;
+
+    public ScoreInfo toInfo() {
+        return ScoreInfo.builder()
+                .userId(userId)
+                .score(score)
+                .rank(rank)
+                .build();
+    }
 }

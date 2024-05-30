@@ -1,5 +1,7 @@
 package com.example.rankboard.interfaces;
 
+import com.example.rankboard.domain.ScoreInfo;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -17,9 +19,18 @@ public class ScoreDto {
     @Getter
     @Setter
     @ToString
+    @Builder
     public static class ResponsePoint {
         private String userId;
-        private Integer rank;
-        private Integer score;
+        private Long rank;
+        private Double score;
+
+        public static ResponsePoint byInfo(ScoreInfo info) {
+            return ResponsePoint.builder()
+                    .userId(info.getUserId())
+                    .rank(info.getRank())
+                    .score(info.getScore())
+                    .build();
+        }
     }
 }
