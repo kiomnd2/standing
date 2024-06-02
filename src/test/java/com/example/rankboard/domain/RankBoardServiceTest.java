@@ -1,6 +1,7 @@
 package com.example.rankboard.domain;
 
 import com.example.rankboard.config.RedisTestConfig;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,14 +19,13 @@ public class RankBoardServiceTest {
     @Test
     public void update_test() {
         ScoreInfo userId = rankBoardService.update("userId", 1);
-        ScoreInfo userId2 = rankBoardService.update("userId2", 4);
-        ScoreInfo userId33 = rankBoardService.update("userId", 1);
-        System.out.println("userId2 = " + userId2.getUserId());
-        System.out.println("userId2.getRank() = " + userId2.getRank());
-        System.out.println(userId2.getScore());
+        ScoreInfo userId2 = rankBoardService.update("userId2", 1);
+        // userId 2점 랭크 0 user
+        ScoreInfo _userId = rankBoardService.update("userId", 1);
 
-        System.out.println("userId33 = " + userId33.getUserId());
-        System.out.println("userId33.getRank() = " + userId33.getRank());
-        System.out.println(userId33.getScore());
+        Assertions.assertThat(_userId.getUserId()).isEqualTo(userId.getUserId());
+        Assertions.assertThat(_userId.getRank()).isEqualTo(0);
+        Assertions.assertThat(_userId.getScore()).isEqualTo(2);
+
     }
 }

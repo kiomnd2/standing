@@ -11,7 +11,6 @@ import redis.embedded.RedisServer;
 import java.io.IOException;
 
 @Profile("test")
-@DisplayName("Embedded Redis 설정")
 @TestConfiguration
 public class RedisTestConfig {
 
@@ -21,13 +20,15 @@ public class RedisTestConfig {
         this.redisServer = new RedisServer(6379);
     }
 
+
+
     @PostConstruct
-    public void startRedis() {
+    public void startRedis() throws IOException {
         this.redisServer.start();
     }
 
     @PreDestroy
-    public void stopRedis() {
+    public void stopRedis() throws IOException {
         this.redisServer.stop();
     }
 }
