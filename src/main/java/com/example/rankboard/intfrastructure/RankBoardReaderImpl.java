@@ -23,7 +23,7 @@ public class RankBoardReaderImpl implements RankBoardReader {
     @Override
     public Score read(String userId) {
         Double score = zSet.score(RANK_BOARD_KEY, userId);
-        Long rank = zSet.rank(RANK_BOARD_KEY, userId);
+        Long rank = zSet.reverseRank(RANK_BOARD_KEY, userId);
         return Score.builder()
                 .userId(userId)
                 .score(score)
