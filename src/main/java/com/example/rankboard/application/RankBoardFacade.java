@@ -5,6 +5,8 @@ import com.example.rankboard.domain.ScoreInfo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Service
 public class RankBoardFacade {
@@ -12,5 +14,13 @@ public class RankBoardFacade {
 
     public ScoreInfo updateScore(String userId, Integer point) {
         return rankBoardService.update(userId, point);
+    }
+
+    public ScoreInfo getScore(String userId) {
+        return rankBoardService.getScore(userId);
+    }
+
+    public List<ScoreInfo> getTop10Player() {
+        return rankBoardService.getTop10Player();
     }
 }

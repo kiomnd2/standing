@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @RestController
@@ -22,12 +23,16 @@ public class RankBoardApi {
 
     @GetMapping
     public CommonResponse<List<ScoreDto.ResponsePoint>> getTop10Players() {
-        return CommonResponse.success(null);
+        List<ScoreInfo> top10Player = rankBoardFacade.getTop10Player();
+        List<ScoreDto.ResponsePoint> responseList = top10Player.stream().map(ScoreDto.ResponsePoint::byInfo)
+                .toList();
+        return CommonResponse.success(responseList);
     }
 
     @GetMapping("{userId}")
     public CommonResponse<ScoreDto.ResponsePoint> getUserDetail(@PathVariable String userId) {
-        return CommonResponse.success(null);
+        ScoreInfo score = rankBoardFacade.getScore(userId);
+        return CommonResponse.success(ScoreDto.ResponsePoint.byInfo(score));
     }
 
 }
